@@ -1,0 +1,39 @@
+# mvp
+## Synopsis
+
+Slapjack
+* 52 cards
+* 2+ players
+* 1 difficulty
+* Keyboard interactive (spacebar and enter buttons)
+* Buttons (new game, cheat)
+* Counter for how many cards each player has
+
+Phase 1
+* Text based visuals
+- Cards displayed as letters, 1-9, J, Q, K, A
+- Center pile shows the most recent card
+* Basic single player controls
+- Pressing enter key: place a card onto center pile
+- Pressing spacebar on a jack: collect all cards
+- Game never really ends
+
+Phase 2
+* Multiplayer
+- Change turns when one player places a card
+- Deal cards evenly
+- Each player manages their own deck
+- Basic AI with random slap time between .3 - .9 sec
+- Slapping on a non-Jack gives other player one card
+- Game ends when any player has all the cards
+
+Phase 3
+* Improved Visuals
+- Real looking cards, table, hands
+- Start menu
+- Animation
+
+Phase 4
+* Saving game data to DB
+- Save wins and losses
+- Save slap success / fail
