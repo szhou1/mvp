@@ -12,15 +12,23 @@ app.controller('mainController', function($scope) {
   $scope.placeCard = function() {
 
     var index = Math.floor(Math.random() * $scope.deck.length);
-    $scope.card = $scope.deck[index];
+    $scope.topcard = $scope.deck[index];
 
     $scope.center.push($scope.deck.splice(index, 1)[0]);
     console.log($scope.deck.length);
     $scope.hand = $scope.deck;
+
   };
 
   $scope.slap = function() {
-
+    if($scope.topcard === 'J') {
+      // collect all cards
+      $scope.hand = $scope.hand.concat($scope.center);
+      $scope.center = [];
+    } else {
+      $scope.placeCard();
+    }
   };
+
 });
 
