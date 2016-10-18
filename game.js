@@ -22,7 +22,9 @@ Game.prototype.slap = function(player, cb) {
       cb(true);
     }
   } else {
-    this.placeCard(player);
+    if(this.center.length > 0) {
+      this.placeCard(player);
+    }
   }
 }
 
@@ -32,9 +34,9 @@ Game.prototype.isSlappable = function() {
   if(topcard && topcard.charAt(0)) {
     var number = topcard.charAt(0);
     if(number === 'J'
-      || number === 'Q'
-      || number ==='K'
-      || number === 'A'
+      // || number === 'Q'
+      // || number ==='K'
+      // || number === 'A'
       ) {
       return true;
     }
