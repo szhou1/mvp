@@ -15,7 +15,9 @@
             <div class="square"></div>
           </div>
           <div class="col-md-4">
-            <div class="square">Opponent 2</div>
+            <div class="square">Opp 2
+              <span>{{game.players[2].hand}}</span><br>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="square"></div>
@@ -23,13 +25,20 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="square">Opp1</div>
+            <div class="square">Opp 1
+              <span>{{game.players[1].hand}}</span><br>
+            </div>
           </div>
           <div class="col-md-4">
-            <div class="square"></div>
+            <div class="square">
+              <span>Top Card: {{game.topcard}}</span><br>
+              <span>Center Pile: {{game.center}}</span><br>
+            </div>
           </div>
           <div class="col-md-4">
-            <div class="square">Opp3</div>
+            <div class="square">Opp 3
+              <span>{{game.players[3].hand}}</span><br>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -37,18 +46,17 @@
             <div class="square"></div>
           </div>
           <div class="col-md-4">
-            <div class="square">Player</div>
+            <div class="square">Player
+              <span>{{game.players[0].hand}}</span><br>
+              <button ng-click="game.placeCard(game.players[0])">Place Card</button>
+              <button ng-click="game.slap()">SLAAAP!</button>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="square"></div>
           </div>
         </div>
-        
-        <span>Top Card: {{game.topcard}}</span><br>
-        <span>Center Pile: {{game.center}}</span><br>
-        <span>Hand: {{game.players[0].hand}}</span><br>
-        <button ng-click="game.placeCard(game.players[0])">Place Card</button>
-        <button ng-click="game.slap()">SLAAAP!</button>
+
       </div>
     </div>
   </body>
