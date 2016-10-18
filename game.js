@@ -4,11 +4,8 @@ function Game() {
   console.log('initializing Game');
   this.center = [];
   this.players = makePlayers();
-  // console.log(this.players);
 
-  // for(var i=0; i<20; i++) {
-
-  // }
+  this.runGame();
 
 };
 
@@ -16,7 +13,6 @@ function Player(name) {
   this.name = name;
   this.hand = [];
   
-
 }
 
 Game.prototype.slap = function(player) {
@@ -48,6 +44,26 @@ Game.prototype.getTopcard = function() {
   } else {
     return this.center[this.center.length-1];
   }
+};
+
+Game.prototype.runGame = function() {
+  var count = 5;
+  // console.log('timeout');
+  var game = this;
+  var gameInterval = setInterval(function() {
+    console.log(game);
+    setTimeout(function() {
+      console.log('inside timeout', game);
+
+    }, 1000);
+
+    count--;
+    console.log(count);
+    if(count < 1) {
+      clearInterval(gameInterval);
+    }
+
+  }, 1000);
 }
 
 function makePlayers(deck) {
