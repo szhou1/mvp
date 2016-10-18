@@ -1,7 +1,7 @@
 'use strict';
 
 function Game() {
-  this.DECK_SIZE = 11;
+  this.DECK_SIZE = 52;
   this.center = [];
   this.players = makePlayers();
   this.currentPlayer = this.players[0];
@@ -27,12 +27,17 @@ Game.prototype.slap = function(player, cb) {
 }
 
 Game.prototype.isSlappable = function() {
-  if(this.getTopcard() === 'J'
-    || this.getTopcard() === 'Q'
-    || this.getTopcard() ==='K'
-    || this.getTopcard() === 'A'
-    ) {
-    return true;
+
+  var topcard = this.getTopcard();
+  if(topcard && topcard.charAt(0)) {
+    var number = topcard.charAt(0);
+    if(number === 'J'
+      || number === 'Q'
+      || number ==='K'
+      || number === 'A'
+      ) {
+      return true;
+    }
   }
   return false;
 }
@@ -73,7 +78,7 @@ function makePlayers(deck) {
   for(var i=0; i<NUM_PLAYERS; i++) {
     var player = new Player(i);
 
-    for(var j=0; j< (deck.length / NUM_PLAYERS); j++) {
+    for(var j=0; j< (52 / NUM_PLAYERS); j++) {
       var index = Math.floor(Math.random() * deck.length);
       var card = deck[index];
       player.hand.push(card);
@@ -83,16 +88,24 @@ function makePlayers(deck) {
     players.push(player);
 
   }
+  // console.log(players);
   return players;
 };
 
 
 function makeDeck() {
-  // var deck = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
-  var deck = [2,3,'J','Q'];
-  for(var i=0; i<2; i++) {
-    deck = deck.concat(deck.slice());
-  }
+  var numbers = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
+  // var numbers = [2,3,'J','Q'];
+  var suites = ['c', 'd', 'h', 's']
 
+  var deck = [];
+  for(var i=0; i<numbers.length; i++) {
+    for(var s = 0; s<suites.length; s++) {
+      deck.push(numbers[i] + suites[s]);
+      // deck = deck.concat(deck.slice());
+    }
+  }
+  // console.log(JSON.stringify(deck));
+  // console.log(deck.length);
   return deck;
 };

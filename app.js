@@ -13,8 +13,8 @@ app.controller('mainController', function($scope, $interval, $timeout, game) {
   var generateRandomSlap = function(isSlappable) {
     if(isSlappable) {
       var randPlayer = Math.ceil(Math.random() * (game.players.length-1));
-      var randDelay = Math.floor(Math.random() * 600) + 1000;
-      
+      var randDelay = Math.floor(Math.random() * 600) + 400;
+
       $timeout(function() {
         console.log('random player slap: ', randPlayer);
         game.slap(game.players[randPlayer], function(success) {

@@ -7,7 +7,7 @@
     <script src="app.js"></script>
     <script src="game.js"></script>
   </head>
-  <body ng-app="slapjackApp">
+  <body ng-app="slapjackApp" background="images/table2.jpg">
     <div> 
       <div ng-controller="mainController">
         <div class="row">
@@ -15,8 +15,9 @@
             <div class="square"></div>
           </div>
           <div class="col-md-4">
-            <div class="square">Opp 2
+            <div class="square">Opponent 2
               <span>{{game.players[2].hand}}</span><br>
+              <span>{{game.players[2].hand.length}} Cards</span><br>
             </div>
           </div>
           <div class="col-md-4">
@@ -25,19 +26,24 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="square">Opp 1
+            <div class="square">Opponent 1
               <span>{{game.players[1].hand}}</span><br>
+              <span>{{game.players[1].hand.length}} Cards</span><br>
+              <img ng-show="game.players[1].hand.length > 0" src="images/deck/back.png"></img><br>
             </div>
           </div>
           <div class="col-md-4">
             <div class="square">
-              <span>Top Card: {{game.topcard}}</span><br>
-              <span>Center Pile: {{game.center}}</span><br>
+              <!-- <span>Top Card: {{game.center[game.center.length-1]}}</span><br> -->
+              <img ng-show="game.center.length > 0" ng-src="images/deck/{{game.center[game.center.length-1]}}.png"></img><br>
+              <!-- <span>Center Pile: {{game.center}}</span><br> -->
+              <!-- <span>Center Pile: {{game.center.length}} Cards</span><br> -->
             </div>
           </div>
           <div class="col-md-4">
-            <div class="square">Opp 3
+            <div class="square">Opponent 3
               <span>{{game.players[3].hand}}</span><br>
+              <span>{{game.players[3].hand.length}} Cards</span><br>
             </div>
           </div>
         </div>
@@ -46,8 +52,9 @@
             <div class="square"></div>
           </div>
           <div class="col-md-4">
-            <div class="square">Player
+            <div class="square">You
               <span>{{game.players[0].hand}}</span><br>
+              <span>{{game.players[0].hand.length}} Cards</span><br>
               <button ng-click="humanPlaceCard(game.players[0])" ng-disabled="waitingForTurn || gameOver">Place Card</button>
               <button ng-click="humanSlap(game.players[0])" ng-disabled="gameOver">SLAAAP!</button>
             </div>
