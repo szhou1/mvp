@@ -6,8 +6,6 @@ function Game() {
   this.players = makePlayers();
   this.currentPlayer = this.players[0];
 
-  // this.runGame();
-
 };
 
 function Player(name) {
@@ -17,7 +15,7 @@ function Player(name) {
 }
 
 Game.prototype.slap = function(player) {
-  if(this.getTopcard() === 'J') {
+  if(this.isSlappable()) {
     // collect all cards
     player.hand = player.hand.concat(this.center);
     this.center = [];
@@ -26,19 +24,22 @@ Game.prototype.slap = function(player) {
   }
 }
 
+Game.prototype.isSlappable = function() {
+  if(this.getTopcard() === 'J'
+    || this.getTopcard() === 'Q'
+    || this.getTopcard() ==='K'
+    || this.getTopcard() === 'A'
+    ) {
+    return true;
+  }
+  return false;
+}
+
 Game.prototype.placeCard = function(player) {
   if(player.hand.length > 0) {
     var card = player.hand.splice(0, 1)[0];
-    // console.log(player.hand.length);
     
     this.center.push(card);
-    var game = this;
-    if(player.name === 0) {
-      // this.waitingForTurn = true;
-      // this.runGame(function() {
-      //   game.waitingForTurn = false;
-      // });
-    }
 
   } else {
     console.error('no cards to play for player ', player.name);
@@ -55,33 +56,6 @@ Game.prototype.getTopcard = function() {
   }
 };
 
-// Game.prototype.runGame = function(cb) {
-//   // console.log('timeout');
-//   var game = this;
-
-//   var count = 1;
-//   var endCount = 2;
-
-//   var gameInterval = setInterval(function() {
-
-//     setTimeout(function() {
-//       console.log('inside timeout', game.players[count], count);
-
-//       game.placeCard(game.players[count]);
-//       count++;
-//       game.waitingForTurn = false;
-//       cb();
-//     }, 0);
-
-//     // console.log(count);
-//     if(count > endCount) {
-//       console.log('clear interval');
-//       clearInterval(gameInterval);
-//     }
-
-//   }, 1000);
-
-// }
 
 function makePlayers(deck) {
   var deck = makeDeck();

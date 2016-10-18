@@ -31,7 +31,7 @@ app.controller('mainController', function($scope, $interval, game) {
     $scope.waitingForTurn = true;
 
     gameInterval = $interval(function() {
-      console.log("hi")
+
       $scope.currentPlayer = game.players[count];
       game.placeCard(game.players[count]);
 
