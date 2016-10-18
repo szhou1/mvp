@@ -4,10 +4,10 @@ function Game() {
   console.log('initializing Game');
   this.center = [];
   this.players = makePlayers();
-  console.log(this.players);
+  // console.log(this.players);
 
   // for(var i=0; i<20; i++) {
-    
+
   // }
 
 };
@@ -17,15 +17,16 @@ function Player(name) {
   this.hand = [];
   
 
-  // this.slap = function() {
-  //   if(topcard === 'J') {
-  //     // collect all cards
-  //     this.hand = this.hand.concat(center);
-  //     center = [];
-  //   } else {
-  //     this.placeCard(this.hand);
-  //   }
-  // }
+}
+
+Game.prototype.slap = function(player) {
+  if(this.getTopcard() === 'J') {
+    // collect all cards
+    player.hand = player.hand.concat(this.center);
+    this.center = [];
+  } else {
+    this.placeCard(player);
+  }
 }
 
 Game.prototype.placeCard = function(player) {
@@ -34,21 +35,20 @@ Game.prototype.placeCard = function(player) {
     console.log(player.hand.length);
     
     this.center.push(card);
+  } else {
+    console.error('no cards to play for player ', player.name);
   }
 
-  console.log('no cards to play for player ', this.name);
 };
 
-// Player.prototype.placeCard = function(cb) {
-//   if(this.hand.length > 0) {
-//     var card = this.hand.splice(0, 1)[0];
-//     console.log(this.hand.length);
-    
-//     cb(card); 
-//   }
-
-//   console.log('no cards to play for player ', this.name);
-// };
+Game.prototype.getTopcard = function() {
+  if(!this.center && this.center.length < 1) {
+    console.error('center is empty')
+    return null;
+  } else {
+    return this.center[this.center.length-1];
+  }
+}
 
 function makePlayers(deck) {
   var deck = makeDeck();
@@ -70,6 +70,7 @@ function makePlayers(deck) {
   }
   return players;
 };
+
 
 function makeDeck() {
   var deck = [1,2,3,4,5,6,7,8,9,'J','Q','K','A'];
