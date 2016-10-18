@@ -10,11 +10,19 @@ app.controller('mainController', function($scope, $interval, game) {
   var gameInterval;
   var count = 1;
   
-  $scope.placeCard = function() {
+  $scope.humanPlaceCard = function() {
     game.placeCard(game.players[0]);
     startOpp();
   }
 
+  $scope.humanSlap = function() {
+    game.slap(game.players[0], function(success) {
+      if(success) {
+        console.log('success')
+        stopInterval();
+      }
+    });
+  }
 
 
   var stopInterval = function() {

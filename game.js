@@ -1,7 +1,6 @@
 'use strict';
 
 function Game() {
-  console.log('initializing Game');
   this.center = [];
   this.players = makePlayers();
   this.currentPlayer = this.players[0];
@@ -14,11 +13,12 @@ function Player(name) {
   
 }
 
-Game.prototype.slap = function(player) {
+Game.prototype.slap = function(player, cb) {
   if(this.isSlappable()) {
     // collect all cards
     player.hand = player.hand.concat(this.center);
     this.center = [];
+    cb(true);
   } else {
     this.placeCard(player);
   }
@@ -65,7 +65,7 @@ function makePlayers(deck) {
   for(var i=0; i<NUM_PLAYERS; i++) {
     var player = new Player(i);
 
-    for(var j=0; j< (52 / NUM_PLAYERS); j++) {
+    for(var j=0; j< (deck.length / NUM_PLAYERS); j++) {
       var index = Math.floor(Math.random() * deck.length);
       var card = deck[index];
       player.hand.push(card);
@@ -80,7 +80,8 @@ function makePlayers(deck) {
 
 
 function makeDeck() {
-  var deck = [1,2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
+  // var deck = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
+  var deck = [2,3,'J','Q'];
   for(var i=0; i<2; i++) {
     deck = deck.concat(deck.slice());
   }
