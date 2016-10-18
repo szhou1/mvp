@@ -4,8 +4,9 @@ function Game() {
   console.log('initializing Game');
   this.center = [];
   this.players = makePlayers();
+  this.currentPlayer = this.players[0];
 
-  this.runGame();
+  // this.runGame();
 
 };
 
@@ -28,9 +29,17 @@ Game.prototype.slap = function(player) {
 Game.prototype.placeCard = function(player) {
   if(player.hand.length > 0) {
     var card = player.hand.splice(0, 1)[0];
-    console.log(player.hand.length);
+    // console.log(player.hand.length);
     
     this.center.push(card);
+    var game = this;
+    if(player.name === 0) {
+      // this.waitingForTurn = true;
+      // this.runGame(function() {
+      //   game.waitingForTurn = false;
+      // });
+    }
+
   } else {
     console.error('no cards to play for player ', player.name);
   }
@@ -46,25 +55,33 @@ Game.prototype.getTopcard = function() {
   }
 };
 
-Game.prototype.runGame = function() {
-  var count = 5;
-  // console.log('timeout');
-  var game = this;
-  var gameInterval = setInterval(function() {
-    console.log(game);
-    setTimeout(function() {
-      console.log('inside timeout', game);
+// Game.prototype.runGame = function(cb) {
+//   // console.log('timeout');
+//   var game = this;
 
-    }, 1000);
+//   var count = 1;
+//   var endCount = 2;
 
-    count--;
-    console.log(count);
-    if(count < 1) {
-      clearInterval(gameInterval);
-    }
+//   var gameInterval = setInterval(function() {
 
-  }, 1000);
-}
+//     setTimeout(function() {
+//       console.log('inside timeout', game.players[count], count);
+
+//       game.placeCard(game.players[count]);
+//       count++;
+//       game.waitingForTurn = false;
+//       cb();
+//     }, 0);
+
+//     // console.log(count);
+//     if(count > endCount) {
+//       console.log('clear interval');
+//       clearInterval(gameInterval);
+//     }
+
+//   }, 1000);
+
+// }
 
 function makePlayers(deck) {
   var deck = makeDeck();
@@ -89,7 +106,7 @@ function makePlayers(deck) {
 
 
 function makeDeck() {
-  var deck = [1,2,3,4,5,6,7,8,9,'J','Q','K','A'];
+  var deck = [1,2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
   for(var i=0; i<2; i++) {
     deck = deck.concat(deck.slice());
   }

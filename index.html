@@ -48,7 +48,7 @@
           <div class="col-md-4">
             <div class="square">Player
               <span>{{game.players[0].hand}}</span><br>
-              <button ng-click="game.placeCard(game.players[0])">Place Card</button>
+              <button ng-click="placeCard(game.players[0])" ng-disabled="waitingForTurn">Place Card</button>
               <button ng-click="game.slap(game.players[0])">SLAAAP!</button>
             </div>
           </div>
