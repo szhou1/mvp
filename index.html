@@ -1,13 +1,48 @@
 <html>
   <head>
     <title>Slapjack!!</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" ></style>
+    <link rel="stylesheet" href="style.css" ></style>
     <script src="./node_modules/angular/angular.js"></script>
-    <!-- <script src="./node_modules/angular-ui-router/release/angular-ui-router.js"></script> -->
     <script src="app.js"></script>
   </head>
   <body ng-app="slapjackApp">
     <div>
       <div ng-controller="mainController">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="square">top left</div>
+          </div>
+          <div class="col-md-4">
+            <div class="square">Opponent 2</div>
+          </div>
+          <div class="col-md-4">
+            <div class="square">top left</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="square">Opp1</div>
+          </div>
+          <div class="col-md-4">
+            <div class="square"></div>
+          </div>
+          <div class="col-md-4">
+            <div class="square">Opp3</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="square"></div>
+          </div>
+          <div class="col-md-4">
+            <div class="square">Player</div>
+          </div>
+          <div class="col-md-4">
+            <div class="square"></div>
+          </div>
+        </div>
+        
         <span>Top Card: {{topcard}}</span><br>
         <span>Center Pile: {{center}}</span><br>
         <span>Hand: {{hand}}</span><br>
