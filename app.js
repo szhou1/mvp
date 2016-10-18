@@ -75,7 +75,7 @@ app.controller('mainController', function($scope, $interval, $timeout, game) {
       if(count > 3) {
         stopInterval();
       }
-    }, 1000);
+    }, (Math.random() * 1000) + 1000);
     
   }
 
