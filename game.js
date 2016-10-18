@@ -15,10 +15,11 @@ function Player(name) {
 
 Game.prototype.slap = function(player, cb) {
   if(this.isSlappable()) {
-    // collect all cards
     player.hand = player.hand.concat(this.center);
     this.center = [];
-    cb(true);
+    if(cb) {
+      cb(true);
+    }
   } else {
     this.placeCard(player);
   }
@@ -41,9 +42,20 @@ Game.prototype.placeCard = function(player) {
     
     this.center.push(card);
 
+    if(this.isSlappable()) {
+      this.generateRandomSlap();
+    }
+
   } else {
     console.error('no cards to play for player ', player.name);
   }
+
+};
+
+Game.prototype.generateRandomSlap = function() {
+  var randPlayer = Math.ceil(Math.random() * (this.players.length-1));
+  console.log('random player slap: ', randPlayer);
+  this.slap(this.players[randPlayer]);
 
 };
 
