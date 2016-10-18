@@ -36,14 +36,14 @@ Game.prototype.isSlappable = function() {
   return false;
 }
 
-Game.prototype.placeCard = function(player) {
+Game.prototype.placeCard = function(player, cb) {
   if(player.hand.length > 0) {
     var card = player.hand.splice(0, 1)[0];
-    
+    console.log(player.name, " placed ", card);
     this.center.push(card);
 
     if(this.isSlappable()) {
-      this.generateRandomSlap();
+      cb(true);
     }
 
   } else {
