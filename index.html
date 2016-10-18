@@ -5,19 +5,20 @@
     <link rel="stylesheet" href="style.css" ></style>
     <script src="./node_modules/angular/angular.js"></script>
     <script src="app.js"></script>
+    <script src="game.js"></script>
   </head>
   <body ng-app="slapjackApp">
-    <div>
+    <div> 
       <div ng-controller="mainController">
         <div class="row">
           <div class="col-md-4">
-            <div class="square">top left</div>
+            <div class="square"></div>
           </div>
           <div class="col-md-4">
             <div class="square">Opponent 2</div>
           </div>
           <div class="col-md-4">
-            <div class="square">top left</div>
+            <div class="square"></div>
           </div>
         </div>
         <div class="row">
@@ -43,12 +44,11 @@
           </div>
         </div>
         
-        <span>Top Card: {{topcard}}</span><br>
-        <span>Center Pile: {{center}}</span><br>
-        <span>Hand: {{hand}}</span><br>
-        <span>Deck: {{deck}}</span><br>
-        <button ng-click="placeCard()">Place Card</button>
-        <button ng-click="slap()">SLAAAP!</button>
+        <span>Top Card: {{game.topcard}}</span><br>
+        <span>Center Pile: {{game.center}}</span><br>
+        <span>Hand: {{game.players[0].hand}}</span><br>
+        <button ng-click="game.placeCard(game.players[0])">Place Card</button>
+        <button ng-click="game.slap()">SLAAAP!</button>
       </div>
     </div>
   </body>
