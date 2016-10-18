@@ -1,6 +1,7 @@
 'use strict';
 
 function Game() {
+  this.DECK_SIZE = 11;
   this.center = [];
   this.players = makePlayers();
   this.currentPlayer = this.players[0];
@@ -43,21 +44,16 @@ Game.prototype.placeCard = function(player, cb) {
     this.center.push(card);
 
     if(this.isSlappable()) {
-      cb(true);
+      if(cb) {
+        cb(true);
+      }
     }
 
   } else {
     console.error('no cards to play for player ', player.name);
   }
-
 };
 
-Game.prototype.generateRandomSlap = function() {
-  var randPlayer = Math.ceil(Math.random() * (this.players.length-1));
-  console.log('random player slap: ', randPlayer);
-  this.slap(this.players[randPlayer]);
-
-};
 
 Game.prototype.getTopcard = function() {
   if(!this.center && this.center.length < 1) {

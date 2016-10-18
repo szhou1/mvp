@@ -13,11 +13,10 @@ app.controller('mainController', function($scope, $interval, $timeout, game) {
   var generateRandomSlap = function(isSlappable) {
     if(isSlappable) {
       var randPlayer = Math.ceil(Math.random() * (game.players.length-1));
-
-      var randDelay = Math.floor(Math.random() * 600) + 300;
+      var randDelay = Math.floor(Math.random() * 600) + 1000;
+      
       $timeout(function() {
         console.log('random player slap: ', randPlayer);
-        // console.log('SLAP')
         game.slap(game.players[randPlayer], function(success) {
           console.log('successful slap by ', randPlayer);
           count = randPlayer;
@@ -36,10 +35,22 @@ app.controller('mainController', function($scope, $interval, $timeout, game) {
       if(success) {
         console.log('success')
         stopInterval();
+        if(determineGameOver()){
+          $scope.gameOver = true;
+        }
       }
     });
   }
 
+  var determineGameOver = function() {
+    
+    for(var i=0; i<game.players.length; i++) {
+      if(game.players[i].hand.length === game.DECK_SIZE) {
+        console.log("Player ", game.players[i].name, " wins!");
+        return true;
+      }
+    }
+  }
 
 
   var stopInterval = function() {

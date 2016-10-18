@@ -48,8 +48,8 @@
           <div class="col-md-4">
             <div class="square">Player
               <span>{{game.players[0].hand}}</span><br>
-              <button ng-click="humanPlaceCard(game.players[0])" ng-disabled="waitingForTurn">Place Card</button>
-              <button ng-click="humanSlap(game.players[0])">SLAAAP!</button>
+              <button ng-click="humanPlaceCard(game.players[0])" ng-disabled="waitingForTurn || gameOver">Place Card</button>
+              <button ng-click="humanSlap(game.players[0])" ng-disabled="gameOver">SLAAAP!</button>
             </div>
           </div>
           <div class="col-md-4">
