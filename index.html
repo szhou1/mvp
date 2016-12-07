@@ -12,12 +12,12 @@
       <div ng-controller="mainController">
         <div class="row">
           <div class="col-md-4">
-            <div class="square"></div>
+            <div class="square title">SlappyJack</div>
           </div>
           <div class="col-md-4">
             <div class="square">Opponent 2 has
               <!-- <span>{{game.players[2].hand}}</span><br> -->
-              <span>{{game.players[2].hand.length}} Cards</span><br>
+              <span class='words'>{{game.players[2].hand.length}} Cards</span><br>
               <img class="card" ng-show="game.players[2].hand.length > 0" src="images/back.png"></img><br>
             </div>
           </div>
@@ -29,7 +29,7 @@
           <div class="col-md-4">
             <div class="square">Opponent 1 has
               <!-- <span>{{game.players[1].hand}}</span><br> -->
-              <span>{{game.players[1].hand.length}} Cards</span><br>
+              <span class='words'>{{game.players[1].hand.length}} Cards</span><br>
               <img class="card" ng-show="game.players[1].hand.length > 0" src="images/back.png"></img><br>
             </div>
           </div>
@@ -38,13 +38,17 @@
               <!-- <span>Top Card: {{game.center[game.center.length-1]}}</span><br> -->
               <img class="card" ng-show="game.center.length > 0" ng-src="images/deck/{{game.center[game.center.length-1]}}.png"></img><br>
               <!-- <span>Center Pile: {{game.center}}</span><br> -->
-              <span>Center Pile has {{game.center.length}} Cards</span><br>
+              <!-- <span>Center Pile has {{game.center.length}} Cards</span><br> -->
+              <span ng-show="gameOver" class="gameOver words">Game Over!</span>
+              <span ng-show="gameOver && win" class="gameOver words">You win!</span>
+              <span ng-show="gameOver && !win" class="gameOver words">Loser!</span>
+              <!-- <img class="card slideFromLeft" src="images/back.png"></img><br> -->
             </div>
           </div>
           <div class="col-md-4">
             <div class="square">Opponent 3 has
               <!-- <span>{{game.players[3].hand}}</span><br> -->
-              <span>{{game.players[3].hand.length}} Cards</span><br>
+              <span class='words'>{{game.players[3].hand.length}} Cards</span><br>
               <img class="card" ng-show="game.players[3].hand.length > 0" src="images/back.png"></img><br>
             </div>
           </div>
@@ -56,7 +60,7 @@
           <div class="col-md-4">
             <div class="square">You have
               <!-- <span>{{game.players[0].hand}}</span><br> -->
-              <span>{{game.players[0].hand.length}} Cards</span><br>
+              <span class='words'>{{game.players[0].hand.length}} Cards</span><br>
               <img class="card" ng-show="game.players[0].hand.length > 0" src="images/back.png"></img><br>
               <button ng-click="humanPlaceCard(game.players[0])" ng-disabled="waitingForTurn || gameOver">Place Card</button>
               <button ng-click="humanSlap(game.players[0])" ng-disabled="gameOver">SLAAAP!</button>

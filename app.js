@@ -4,7 +4,7 @@ app.factory('game', function() {
   return new Game();
 });
 
-app.controller('mainController', function($scope, $interval, $timeout, game) {
+app.controller('mainController', function($scope, $interval, $timeout, $window, game) {
   $scope.game = game;
   $scope.currentPlayer = game.players[0];
   var gameInterval;
@@ -27,6 +27,8 @@ app.controller('mainController', function($scope, $interval, $timeout, game) {
 
   $scope.humanPlaceCard = function() {
     game.placeCard(game.players[0], generateRandomSlap);
+    determineGameOver();
+
     startInterval();
   }
 
@@ -35,19 +37,25 @@ app.controller('mainController', function($scope, $interval, $timeout, game) {
       if(success) {
         console.log('success')
         stopInterval();
-        if(determineGameOver()){
-          $scope.gameOver = true;
-        }
+        // if(determineGameOver()){
+        //   $scope.gameOver = true;
+        // }
       }
     });
+    determineGameOver();
   }
 
   var determineGameOver = function() {
-    
+    var win = false;
     for(var i=0; i<game.players.length; i++) {
       if(game.players[i].hand.length === game.DECK_SIZE) {
         console.log("Player ", game.players[i].name, " wins!");
-        return true;
+        $scope.win = true;
+        $scope.gameOver = true;
+        break;
+      } else if(game.players[0].hand.length === 0) {
+        $scope.win = false;
+        $scope.gameOver = true;
       }
     }
   }
